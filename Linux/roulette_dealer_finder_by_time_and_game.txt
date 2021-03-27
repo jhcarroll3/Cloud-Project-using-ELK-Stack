@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# This script will allow and require the entering of a two digit time
+read -p "what time " gametime1 gametime2 gametime3
+
+./Bonus-10221 | grep -i -e $gametime1 -e $gametime2 -e $gametime3

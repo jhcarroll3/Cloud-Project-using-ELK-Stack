@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#This script was written to address the Bonus portion of the homework
+
+#gm1 is Black Jack, gm2 is Roulette, gm3 is Texas Hold'Em
+
+read -p "provide the filename " filename
+read -p "provide the game played " gamename
+
+
+if [ $gamename == "BlackJack" ]; then
+	dealer= awk -F " " '{print $1$2,$3,$4}' $filename
+elif [ $gamename == "Roulette" ]; then
+	dealer= awk -F " " '{print $1$2,$5,$6}' $filename
+elif [ $gamename == "TexasHold" ]; then
+        dealer= awk -F " " '{print $1$2,$7,$8}' $filename
+else
+	echo "not valid"
+	exit
+fi
+echo $dealer

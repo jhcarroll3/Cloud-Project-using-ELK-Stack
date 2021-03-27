@@ -1,0 +1,39 @@
+Step 3: Correlating the Evidence
+
+
+#4. Preview the file Roulette_Losses and analyze the data.
+
+	Record in the Notes_Player_Analysis file:
+
+	The times the losses occurred on each day.
+	If there is a certain player that was playing during each of those times.
+	The total count of times this player was playing.
+		Hint: Use the wc command to find this value.
+
+
+0310_win_loss_player_data:05:00:00AM
+0310_win_loss_player_data:08:00:00AM
+0310_win_loss_player_data:02:00:00PM
+0310_win_loss_player_data:08:00:00PM
+0310_win_loss_player_data:11:00:00PM
+0312_win_loss_player_data:05:00:00AM
+0312_win_loss_player_data:08:00:00AM
+0312_win_loss_player_data:02:00:00PM
+0312_win_loss_player_data:08:00:00PM
+0312_win_loss_player_data:11:00:00PM
+0315_win_loss_player_data:05:00:00AM
+0315_win_loss_player_data:08:00:00AM
+0315_win_loss_player_data:02:00:00PM
+1:Mylie
+2:Mylie
+3:Mylie
+4:Mylie
+5:Mylie
+6:Mylie
+7:Mylie
+8:Mylie
+9:Mylie
+10:Mylie
+11:Mylie
+12:Mylie
+13:Mylie
