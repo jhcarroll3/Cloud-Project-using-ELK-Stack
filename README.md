@@ -65,8 +65,8 @@ Only the *Workstation* machine can accept connections from the Internet. Access 
 - 108.252.25.77 *Host Public IP*
 
 Machines within the network can only be accessed by *ssh*.
-- *Jump Box*   *Private IP*:*10.0.0.4*
-               *Public IP* :*104.214.77.211 
+- *Jump Box*   *Private IP*:10.0.0.4
+               *Public IP* :104.214.77.211 
 
 A summary of the access policies in place can be found in the table below.
 
