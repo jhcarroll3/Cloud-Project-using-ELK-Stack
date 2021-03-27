@@ -118,8 +118,9 @@ SSH into the control node and follow the steps below:
 
 - _Which file is the playbook? *Answer:* [install-elk.yml] Copy this playbook to the__ *Answer:* /etc/ansible folder.
 - _Which file do you update to make Ansible run the playbook on a specific machine? Answer: Update the [ansible-config].  How do I specify which machine to install the ELK server on versus which to install Filebeat on?_*Answer:* First, update the hostname in the hosts file and then save. Next, update the [ansible-config] file and then save.
-- _Which URL do you navigate to in order to check that the ELK server is running? *Answer*: Enter: http://[ELK-SERVER Public IP]:5601
+- _Which URL do you navigate to in order to check that the ELK server is running? *Answer*: Enter: #http://[ELK-SERVER Public IP]:5601#
 
 _ Commands you need to know:                                                               
-  *Download:* ansible-playbook name-of-file.yml
-  *Updating the files:* nano name-and-path-of-file.yml
+  *Download:* ##ansible-playbook name-of-file.yml##
+  
+  *Updating the files:* ##nano name-and-path-of-file.yml##
