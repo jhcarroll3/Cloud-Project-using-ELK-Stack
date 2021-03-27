@@ -11,7 +11,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
     
     *Step 1:*
     
-    [ansible-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/pentest.yml)
+    [ansible-config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/ansible-config.yml)
     
     *Step 2:*
     
@@ -19,11 +19,13 @@ These files have been tested and used to generate a live ELK deployment on Azure
     
     *Step 3:*
     
-    [filebeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-playbook.yml)
-    
     [filebeat_config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-configuration.yml)
     
+    [filebeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-playbook.yml
+     
     *Step 4:*
+    
+    [metricbeat-config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/metricbeat-configuration.yml)
     
     [metricbeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/metricbeat-playbook.yml)
     
@@ -64,9 +66,9 @@ The machines on the internal network are not exposed to the public Internet.
 Only the *Workstation* machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - 108.252.25.77 *Host Public IP*
 
-Machines within the network can only be accessed by the user via *ssh*.
-- *Jump Box*   *Private IP*:10.0.0.4
-                *Public IP*:104.214.77.211 
+Machines within the network can only be accessed by *ssh*.
+- *Jump Box*   *Private IP*:*10.0.0.4*
+               *Public IP* :*104.214.77.211 
 
 A summary of the access policies in place can be found in the table below.
 
@@ -85,11 +87,11 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 
 The playbook implements the following tasks:
 - 
- 1. Install docker.io - *to update the cache*
- 2. Install pip3 and python
- 3. Increase virtual memory
- 4. Download and launch a docker *elk* container     
- 5. Enable service docker on boot
+- 1. Install docker.io - *to update the cache*
+- 2. Install pip3 and python
+- 3. Increase virtual memory
+- 4. Download and launch a docker *elk* container     
+- 5. Enable service docker on boot
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -118,9 +120,8 @@ SSH into the control node and follow the steps below:
 
 - _Which file is the playbook? *Answer:* [install-elk.yml] Copy this playbook to the__ *Answer:* /etc/ansible folder.
 - _Which file do you update to make Ansible run the playbook on a specific machine? Answer: Update the [ansible-config].  How do I specify which machine to install the ELK server on versus which to install Filebeat on?_*Answer:* First, update the hostname in the hosts file and then save. Next, update the [ansible-config] file and then save.
-- _Which URL do you navigate to in order to check that the ELK server is running? *Answer*: Enter: #http://[ELK-SERVER Public IP]:5601#
+- _Which URL do you navigate to in order to check that the ELK server is running? *Answer*: Enter: http://[ELK-SERVER Public IP]:5601
 
 _ Commands you need to know:                                                               
-  *Download:* ##ansible-playbook name-of-file.yml
-  
+  *Download:* ansible-playbook name-of-file.yml
   *Updating the files:* nano name-and-path-of-file.yml
