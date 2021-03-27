@@ -85,11 +85,11 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 
 The playbook implements the following tasks:
 - 
-- 1. Install docker.io - *to update the cache*
-- 2. Install pip3 and python
-- 3. Increase virtual memory
-- 4. Download and launch a docker *elk* container     
-- 5. Enable service docker on boot
+ 1. Install docker.io - *to update the cache*
+ 2. Install pip3 and python
+ 3. Increase virtual memory
+ 4. Download and launch a docker *elk* container     
+ 5. Enable service docker on boot
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
