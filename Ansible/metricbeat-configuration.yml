@@ -1,163 +1,128 @@
-###################### Metricbeat Configuration Example #######################
+## Automated ELK Stack Deployment
 
-# This file is an example configuration file highlighting only the most common
-# options. The metricbeat.reference.yml file from the same directory contains all the
-# supported options with more comments. You can use it as a reference.
-#
-# You can find the full configuration reference here:
-# https://www.elastic.co/guide/en/beats/metricbeat/index.html
+The files in this repository were used to configure the network depicted below.
 
-#==========================  Modules configuration ============================
+[Cloud Diagram](https://github.com/jhcarroll3/Project-1/blob/main/Diagrams/Cloud%20Diagram.png)
+        
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
-metricbeat.config.modules:
-  # Glob pattern for configuration loading
-  path: ${path.config}/modules.d/*.yml
-
-  # Set to true to enable config reloading
-  reload.enabled: false
-
-  # Period on which files under path should be checked for changes
-  #reload.period: 10s
-
-#==================== Elasticsearch template setting ==========================
-
-setup.template.settings:
-  index.number_of_shards: 1
-  index.codec: best_compression
-  #_source.enabled: false
-
-#================================ General =====================================
-
-# The name of the shipper that publishes the network data. It can be used to group
-# all the transactions sent by a single shipper in the web interface.
-#name:
-
-# The tags of the shipper are included in their own field with each
-# transaction published.
-#tags: ["service-X", "web-tier"]
-
-# Optional fields that you can specify to add additional information to the
-# output.
-#fields:
-#  env: staging
+  - 
+    
+    *Step 1:*
+    
+    [ansible-config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/ansible-config.yml)
+    
+    [ansible-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/pentest.yml)
+    
+    *Step 2:*
+    
+    [install-elk.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/install-elk.yml)
+    
+    *Step 3:*
+    
+    [filebeat_config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-configuration.yml)
+    
+    [filebeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-playbook.yml
+     
+    *Step 4:*
+    
+    [metricbeat-config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/metricbeat-configuration.yml)
+    
+    [metricbeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/metricbeat-playbook.yml)
+    
+This document contains the following details:
+- Description of the Topology
+- Access Policies
+- ELK Configuration
+  - Beats in Use
+  - Machines Being Monitored
+- How to Use the Ansible Build
 
 
-#============================== Dashboards =====================================
-# These settings control loading the sample dashboards to the Kibana index. Loading
-# the dashboards is disabled by default and can be enabled either by setting the
-# options here or by using the `setup` command.
-#setup.dashboards.enabled: false
+### Description of the Topology
 
-# The URL from where to download the dashboards archive. By default this URL
-# has a value which is computed based on the Beat name and version. For released
-# versions, this URL points to the dashboard archive on the artifacts.elastic.co
-# website.
-#setup.dashboards.url:
+The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-#============================== Kibana =====================================
+Load balancing ensures that the application will be highly available, in addition to restricting traffic to the network.
+- Load balancers ensure no single server has too much traffic to handle. They help protect the availability of resources. Jump Boxes are typically used for a system tool that needs to connect directly to the devices on the security zone in question.  The hidden benefit of using a Jump Box is that any tools in place are maintained on the single system of the Jump Box itself. Any updates that need to occur by a system's software are managed by the Jump Box alone. 
 
-# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
-# This requires a Kibana endpoint configuration.
-setup.kibana:
-  host: "10.0.0.12:5601"
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the metrics and system logs.
+- Filebeat watches and monitors the log files or locations that users specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing. 
+- Metricbeat collects and ships various system and service metrics to a specified output destination. Metricbeat is installed on the different servers in your environment and used for monitoring their performance, as well as that of different external services running on them.
 
-  # Kibana Host
-  # Scheme and port can be left out and will be set to the default (http and 5601)
-  # In case you specify and additional path, the scheme is required: http://localhost:5601/path
-  # IPv6 addresses should always be defined as: https://[2001:db8::1]:5601
-  #host: "localhost:5601"
+The configuration details of each machine may be found below.
 
-  # Kibana Space ID
-  # ID of the Kibana Space into which the dashboards should be loaded. By default,
-  # the Default Space will be used.
-  #space.id:
+| Name      | Function | IP Address | Operating System |
+|-----------|----------|------------|------------------|
+| Jump Box  | Gateway  | 10.0.0.4   | Linux            |
+| ELK-SERVER| Monitor  | 10.1.0.4   | Linux            |
+|   Web-1   | Website  | 10.0.0.5   | Linux            |
+|   Web-2   | Website  | 10.0.0.6   | Linux            |
+|   Web-3   | Website  | 10.0.0.7   | Linux            | 
 
-#============================= Elastic Cloud ==================================
+### Access Policies
 
-# These settings simplify using Metricbeat with the Elastic Cloud (https://cloud.elastic.co/).
+The machines on the internal network are not exposed to the public Internet. 
 
-# The cloud.id setting overwrites the `output.elasticsearch.hosts` and
-# `setup.kibana.host` options.
-# You can find the `cloud.id` in the Elastic Cloud web UI.
-#cloud.id:
+Only the *Workstation* machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+- 108.252.25.77 *Host Public IP*
 
-# The cloud.auth setting overwrites the `output.elasticsearch.username` and
-# `output.elasticsearch.password` settings. The format is `<user>:<pass>`.
-#cloud.auth:
+Machines within the network can only be accessed by *ssh*.
+- *Jump Box*   *Private IP*:*10.0.0.4*
+               *Public IP* :*104.214.77.211 
 
-#================================ Outputs =====================================
+A summary of the access policies in place can be found in the table below.
 
-# Configure what output to use when sending the data collected by the beat.
+| Name      | Publicly Accessible | Allowed IP Addresses |
+|-----------|---------------------|----------------------|
+| Jump Box  |     No              |   Host Public IP     |
+| ELK-SERVER|     No              |   Host Public IP     |
+|   Web-1   |     No              |   Host Public IP     |
+|   Web-2   |     No              |   Host Public IP     |
+|   Web-3   |     No              |   Host Public IP     |
 
-#-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
-  # Array of hosts to connect to.
-  hosts: ["10.0.0.12:9200"]
-  username: "elastic"
-  password: "changeme"
+### Elk Configuration
 
-  # Optional protocol and basic auth credentials.
-  #protocol: "https"
-  #username: "elastic"
-  #password: "changeme"
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
+- What is the main advantage of automating configuration with Ansible?_The advantage of automated configuration with Ansible is that it increases efficiency when configuring multiple machines.
 
-#----------------------------- Logstash output --------------------------------
-#output.logstash:
-  # The Logstash hosts
-  #hosts: ["localhost:5044"]
+The playbook implements the following tasks:
+- 
+- 1. Install docker.io - *to update the cache*
+- 2. Install pip3 and python
+- 3. Increase virtual memory
+- 4. Download and launch a docker *elk* container     
+- 5. Enable service docker on boot
 
-  # Optional SSL. By default is off.
-  # List of root certificates for HTTPS server verifications
-  #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-  # Certificate for SSL client authentication
-  #ssl.certificate: "/etc/pki/client/cert.pem"
+[docker ps output](https://github.com/jhcarroll3/Project-1/blob/main/Diagrams/sudo%20docker%20ps_screenshot.png)
 
-  # Client Certificate Key
-  #ssl.key: "/etc/pki/client/cert.key"
+### Target Machines & Beats
+This ELK server is configured to monitor the following machines:
+- 
+  - _Web-1_: *10.0.0.5*
+  - _Web-2_: *10.0.0.6*
+  - _Web-3_: *10.0.0.7*
 
-#================================ Processors =====================================
+We have installed the following Beats on these machines:
+  - *Filebeat*
+  - *Metricbeat*
 
-# Configure processors to enhance or manipulate events generated by the beat.
+These Beats allow us to collect the following information from each machine:
+- 
+  - *Filebeat* collects log events, and forwards the information to *Elasticsearch* or *Logstash* for indexing.
+  - *Metricbeat* collects system metrics from the operating system as well as system services. 
 
-processors:
-  - add_host_metadata: ~
-  - add_cloud_metadata: ~
+### Using the Playbook
+In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
-#================================ Logging =====================================
+SSH into the control node and follow the steps below:
 
-# Sets log level. The default log level is info.
-# Available log levels are: error, warning, info, debug
-#logging.level: debug
+- _Which file is the playbook? *Answer:* [install-elk.yml] Copy this playbook to the__ *Answer:* /etc/ansible folder.
+- _Which file do you update to make Ansible run the playbook on a specific machine? Answer: Update the [ansible-config].  How do I specify which machine to install the ELK server on versus which to install Filebeat on?_*Answer:* First, update the hostname in the hosts file and then save. Next, update the [ansible-config] file and then save.
+- _Which URL do you navigate to in order to check that the ELK server is running? *Answer*: Enter: http://[ELK-SERVER Public IP]:5601
 
-# At debug level, you can selectively enable logging only for some components.
-# To enable all selectors use ["*"]. Examples of other selectors are "beat",
-# "publish", "service".
-#logging.selectors: ["*"]
-
-#============================== X-Pack Monitoring ===============================
-# metricbeat can export internal metrics to a central Elasticsearch monitoring
-# cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The
-# reporting is disabled by default.
-
-# Set to true to enable the monitoring reporter.
-#monitoring.enabled: false
-
-# Sets the UUID of the Elasticsearch cluster under which monitoring data for this
-# Metricbeat instance will appear in the Stack Monitoring UI. If output.elasticsearch
-# is enabled, the UUID is derived from the Elasticsearch cluster referenced by output.elasticsearch.
-#monitoring.cluster_uuid:
-
-# Uncomment to send the metrics to Elasticsearch. Most settings from the
-# Elasticsearch output are accepted here as well.
-# Note that the settings should point to your Elasticsearch *monitoring* cluster.
-# Any setting that is not set is automatically inherited from the Elasticsearch
-# output configuration, so if you have the Elasticsearch output configured such
-# that it is pointing to your Elasticsearch monitoring cluster, you can simply
-# uncomment the following line.
-#monitoring.elasticsearch:
-
-#================================= Migration ==================================
-
-# This allows to enable 6.7 migration aliases
-#migration.6_to_7.enabled: true
+_ Commands you need to know:                                                               
+  *Download:* ansible-playbook name-of-file.yml
+  *Updating the files:* nano name-and-path-of-file.yml
