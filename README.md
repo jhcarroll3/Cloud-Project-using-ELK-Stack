@@ -19,7 +19,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
     
     *Step 3:*
     
-    [filebeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-playbook.yml
+    [filebeat-playbook.yml](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-playbook.yml)
     
     [filebeat_config](https://github.com/jhcarroll3/Project-1/blob/main/Ansible/filebeat-configuration.yml)
     
