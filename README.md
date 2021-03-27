@@ -121,6 +121,6 @@ SSH into the control node and follow the steps below:
 - _Which URL do you navigate to in order to check that the ELK server is running? *Answer*: Enter: #http://[ELK-SERVER Public IP]:5601#
 
 _ Commands you need to know:                                                               
-  *Download:* ##ansible-playbook name-of-file.yml##
+  *Download:* ##ansible-playbook name-of-file.yml
   
-  *Updating the files:* ##nano name-and-path-of-file.yml##
+  *Updating the files:* nano name-and-path-of-file.yml
