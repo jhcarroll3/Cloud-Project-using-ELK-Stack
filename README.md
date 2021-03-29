@@ -64,7 +64,7 @@ The configuration details of each machine may be found below.
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the *Workstation* machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- 108.252.25.77 *Host Public IP*
+- [REDACTED] *Host Public IP*
 
 Machines within the network can only be accessed by *ssh*.
 - *Jump Box*   *Private IP*:*10.0.0.4*
